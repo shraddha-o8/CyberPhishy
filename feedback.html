@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/shield_tab_icon.svg" />
+  <title>Feedback & Bug Report — CyberPhishy</title>
+  <meta name="description" content="Report false positives, extension bugs, or send feedback to the CyberPhishy developer." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/feedback.css">
+</head>
+<body>
+
+  <!-- Background Canvas Animation -->
+  <canvas id="node-graph-canvas"></canvas>
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="container nav-content">
+      <a href="index.html" class="nav-brand">
+        <svg class="icon-shield-sm" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+        </svg>
+        <span>Cyber<strong>Phishy</strong></span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="index.html" class="nav-link">← Back to Home</a>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+          <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container feedback-container">
+    <div class="feedback-card">
+      <div class="feedback-header">
+        <span class="topic-tag">Support & Feedback</span>
+        <h2>Help Improve CyberPhishy</h2>
+        <p class="section-subtext">Did a website break? Encounter a false detection, or have an idea for an anti-phishing heuristic?</p>
+      </div>
+
+      <!-- Quick Issue Hub -->
+      <div class="github-hub-box">
+        <div class="hub-text">
+          <h4>Public GitHub Issue Tracker</h4>
+          <p>For fastest resolution, submit reproducible domain bugs or false positive reports directly to the tracker.</p>
+        </div>
+        <a href="https://github.com/shraddha-o8/CyberPhishy-/issues/new" target="_blank" rel="noopener noreferrer" class="btn btn-shimmer">
+          <span class="btn-text">Submit GitHub Issue</span>
+        </a>
+      </div>
+
+      <div class="divider-text"><span>or send direct feedback</span></div>
+
+      <!-- Enhanced Feedback Form -->
+      <form class="feedback-form" action="https://formspree.io/f/mzepjeya" method="POST">
+
+        <!-- Smooth Custom Animated Dropdown -->
+        <div class="form-group">
+          <label for="feedback-category-input">Report Category</label>
+          <input type="hidden" id="feedback-category-input" name="category" required />
+
+          <div class="custom-select-container" id="custom-category-select">
+            <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+              <span class="selected-value placeholder">Select a report category...</span>
+              <span class="select-chevron"></span>
+            </button>
+
+            <div class="custom-select-menu" role="listbox">
+              <div class="menu-group-label">Threat & Accuracy Reports</div>
+              <div class="custom-option" role="option" data-value="false-positive">
+                <span class="opt-icon">🛡️</span> False Positive (Legitimate site blocked)
+              </div>
+              <div class="custom-option" role="option" data-value="false-negative">
+                <span class="opt-icon">⚠️</span> False Negative (Phishing link was missed)
+              </div>
+
+              <div class="menu-group-label">Technical & Experience</div>
+              <div class="custom-option" role="option" data-value="bug">
+                <span class="opt-icon">🐛</span> Extension Bug / UI Glitch
+              </div>
+              <div class="custom-option" role="option" data-value="performance">
+                <span class="opt-icon">⚡</span> Slowdown / Performance Issue
+              </div>
+              <div class="custom-option" role="option" data-value="suggestion">
+                <span class="opt-icon">💡</span> Feature Suggestion
+              </div>
+              <div class="custom-option" role="option" data-value="other">
+                <span class="opt-icon">💬</span> Other Inquiry
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-url">Target URL (if reporting a domain error)</label>
+          <input type="text" id="feedback-url" name="target_url" placeholder="https://example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-email">Your Email (optional, for follow-up)</label>
+          <input type="email" id="feedback-email" name="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="feedback-details">Details & Steps to Reproduce</label>
+          <textarea id="feedback-details" name="details" rows="4" placeholder="Describe what happened, what domain you were visiting, and your browser version..." required></textarea>
+        </div>
+
+        <!-- 5-Star Overall Rating Widget -->
+        <div class="form-group rating-group">
+          <label>Overall Experience Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="star-5" name="rating" value="5" />
+            <label for="star-5" title="5 Stars - Outstanding">★</label>
+
+            <input type="radio" id="star-4" name="rating" value="4" />
+            <label for="star-4" title="4 Stars - Very Good">★</label>
+
+            <input type="radio" id="star-3" name="rating" value="3" />
+            <label for="star-3" title="3 Stars - Average">★</label>
+
+            <input type="radio" id="star-2" name="rating" value="2" />
+            <label for="star-2" title="2 Stars - Needs Improvement">★</label>
+
+            <input type="radio" id="star-1" name="rating" value="1" />
+            <label for="star-1" title="1 Star - Poor">★</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-shimmer submit-btn">
+          <span class="btn-text">Transmit Feedback</span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 CyberPhishy Project. All rights reserved.</p>
+      <a href="https://github.com/shraddha-o8" target="_blank" rel="noopener noreferrer" class="banner-badge" style="text-decoration: none;">
+        <svg class="github-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/index.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/feedback.js"></script>
+</body>
+</html>
