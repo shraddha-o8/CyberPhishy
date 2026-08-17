@@ -283,7 +283,52 @@ main.container {
   transform: translateY(-2px);
   box-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
 }
+/* ==========================================================================
+   Secondary Outline / Ghost Button (Glass & Neon Hover)
+   ========================================================================== */
+.btn-outline {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
+.btn-outline .github-icon {
+  color: var(--text-main);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover State: Neon Border Glow + Slight Lift */
+.btn-outline:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25), var(--shadow-md);
+  background-color: var(--accent-light);
+}
+
+.btn-outline:hover .github-icon {
+  color: var(--accent-cyan);
+  transform: rotate(-8deg) scale(1.1);
+}
+
+/* Active Press State */
+.btn-outline:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Light Theme Hover Tweaks */
+[data-theme="light"] .btn-outline:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .btn-outline:hover .github-icon {
+  color: var(--accent-color);
+}
 /* ==========================================================================
    Section Headers
    ========================================================================== */
