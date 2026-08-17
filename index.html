@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/shield_tab_icon.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/shield_tab_icon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/shield_tab_icon.svg" />
+
+  <title>CyberPhishy — Real-Time Phishing & Web Threat Detector</title>
+  <meta name="title" content="CyberPhishy — Web Security & Phishing Detector" />
+  <meta name="description" content="A lightweight browser extension that protects you from phishing, typosquatting, insecure forms, and tracking." />
+
+  <!-- Fonts: Inter, Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shraddha-o8.github.io/cyberphishy/" />
+  <meta property="og:title" content="CyberPhishy — Web Security & Phishing Detector" />
+  <meta property="og:description" content="Surf the web with zero phish anxiety. Open-source client-side defense." />
+  <meta property="og:image" content="https://shraddha-o8.github.io/cyberphishy/assets/CyberPhishy.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://shraddha-o8.github.io/cyberphishy/" />
+  <meta property="twitter:title" content="CyberPhishy — Web Security & Phishing Detector" />
+  <meta property="twitter:description" content="Surf the web with zero phish anxiety. Open-source client-side defense." />
+  <meta property="twitter:image" content="https://shraddha-o8.github.io/cyberphishy/assets/CyberPhishy.png" />
+</head>
+<body>
+
+  <!-- Fullscreen Interactive Canvas Background -->
+  <canvas id="node-graph-canvas"></canvas>
+
+  <!-- Theme Switcher -->
+  <div class="theme-toggle-container">
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+      <svg class="icon icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+      </svg>
+      <svg class="icon icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Header / Hero Section -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-title">
+        <svg class="icon-shield" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+        </svg>
+        <h1>CyberPhishy</h1>
+      </div>
+
+      <!-- Typewriter Subtitle -->
+      <p class="hero-tagline">
+        <span id="typewriter-text"></span><span class="typewriter-cursor">|</span>
+      </p>
+      <p class="hero-subtext">Real-time heuristics, zero data logging, and immediate threat alerts right in your browser.</p>
+
+      <!-- Action Buttons -->
+      <div class="controls-section" style="justify-content: center; margin-top: 24px;">
+        <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener noreferrer" class="btn btn-shimmer">
+          <span class="shimmer-sparkle"></span>
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span class="btn-text">Add to Chrome — It's Free</span>
+        </a>
+        <a href="https://github.com/shraddha-o8" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main);">
+          <svg class="github-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>View on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+      <!-- FEATURES SECTION (Bento Grid) -->
+          <div class="section-title">
+            <h2>Extension Defense Engines</h2>
+          </div>
+
+          <section class="bento-grid" style="margin-bottom: 48px;">
+            <!-- Bento Item 1: Large Featured Card (Spans 2 columns) -->
+            <div class="term-card bento-span-2">
+              <span class="topic-tag">Anti-Phishing Engine</span>
+              <h3>Typosquatting & IDN Homograph Detection</h3>
+              <p class="short-def">Scans and decodes lookalike Cyrillic, Greek, and punycode strings alongside deliberate brand misspellings in real time before page execution.</p>
+              <div class="layman-def">
+                <strong>In Action:</strong> Flags deceptive spoof domains like <code>g00gle.com</code> or <code>аррӏе.com</code> before you enter private credentials.
+              </div>
+            </div>
+
+            <!-- Bento Item 2: Jargon Integrator -->
+            <div class="term-card">
+              <span class="topic-tag">Tech Jargon</span>
+              <h3>Plain-English Lexicon</h3>
+              <p class="short-def">Translates complex security alerts, error codes, and protocols into everyday language inside your warning popups.</p>
+              <div class="layman-def">
+                <strong>In Action:</strong> Explains exactly what a "MitM" or "SSL downgrade" means without technical gatekeeping.
+              </div>
+            </div>
+
+            <!-- Bento Item 3: Insecure Form Guard -->
+            <div class="term-card">
+              <span class="topic-tag">Form Guard</span>
+              <h3>Insecure Form Protection</h3>
+              <p class="short-def">Scans the DOM for unencrypted HTTP post endpoints and sneaky cross-domain credential hijacking forms.</p>
+              <div class="layman-def">
+                <strong>In Action:</strong> Blocks submit events on unencrypted password and credit card inputs.
+              </div>
+            </div>
+
+            <!-- Bento Item 4: Privacy Stripper -->
+            <div class="term-card">
+              <span class="topic-tag">Privacy Guard</span>
+              <h3>Tracking Link Stripper</h3>
+              <p class="short-def">Cleans out telemetry tags, click-tracking redirects, and invasive UTM queries directly from navigation links.</p>
+              <div class="layman-def">
+                <strong>In Action:</strong> Keeps your outbound clicks untracked and shared links clean.
+              </div>
+            </div>
+
+            <!-- Bento Item 5: Performance & Sandbox -->
+            <div class="term-card">
+              <span class="topic-tag">Architecture</span>
+              <h3>100% Client-Side Engine</h3>
+              <p class="short-def">Evaluates web threats completely inside your local browser sandbox without dispatching remote telemetry pings.</p>
+              <div class="layman-def">
+                <strong>In Action:</strong> Zero-latency protection that respects network bandwidth and data privacy.
+              </div>
+            </div>
+          </section>
+
+    <!-- PRIVACY POLICY SECTION -->
+    <div id="privacy" class="section-title">
+      <h2>Privacy Policy</h2>
+    </div>
+
+    <section class="term-card" style="margin-bottom: 48px;">
+      <span class="topic-tag">Store Compliance</span>
+      <h3 style="margin-top: 4px;">Zero-Log Data Commitment</h3>
+      <p class="short-def">CyberPhishy was built under the principle of minimal necessary access and complete client-side autonomy.</p>
+      <div class="layman-def" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+        <p><strong>1. No Data Collection:</strong> We do not log, store, monitor, or transmit your browsing history, visited web pages, form data, IP addresses, or personal identifiers.</p>
+        <p><strong>2. Local Heuristics:</strong> All URL decoding, regex validations, and pattern analysis are executed entirely inside your device's browser engine.</p>
+        <p><strong>3. Minimal Permissions:</strong> Permissions requested (such as <code>webNavigation</code> or <code>activeTab</code>) are used exclusively to protect the current active session in real-time.</p>
+      </div>
+    </section>
+
+    <!-- SUPPORT & FAQS SECTION -->
+    <div id="support" class="section-title">
+      <h2>Support & FAQ</h2>
+    </div>
+
+    <section class="terms-grid" style="margin-bottom: 40px;">
+      <div class="term-card">
+        <h3>How do I report a false positive?</h3>
+        <p class="short-def">If a legitimate website is accidentally flagged, you can whitelist the domain directly from the extension popup or submit an issue on our GitHub repo.</p>
+      </div>
+
+      <div class="term-card">
+        <h3>Does it slow down browsing?</h3>
+        <p class="short-def">No. CyberPhishy relies on lightweight, compiled pattern matching that runs in single-digit milliseconds without making blocking external API calls.</p>
+      </div>
+
+      <div class="term-card" style="grid-column: 1 / -1; text-align: center; align-items: center;">
+        <h3>Need direct technical support?</h3>
+        <p class="short-def">Have questions or want to contribute to the open-source heuristics?</p>
+        <a href="https://github.com/shraddha-o8" target="_blank" rel="noopener noreferrer" class="btn btn-shimmer" style="margin-top: 10px;">
+          <span class="btn-text">Open an Issue on GitHub</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Banner -->
+  <aside class="sticky-banner-wrapper">
+    <a href="https://github.com/shraddha-o8" target="_blank" rel="noopener noreferrer" class="sticky-banner" aria-label="Visit GitHub Profile">
+      <span class="banner-badge">
+        <svg class="github-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        GitHub
+      </span>
+      <span class="banner-text">Explore more security tools by <strong>shraddha-o8</strong></span>
+      <span class="banner-trailing">→</span>
+    </a>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 CyberPhishy Project. Released under the MIT License.</p>
+      <a href="https://github.com/shraddha-o8" target="_blank" rel="noopener noreferrer" class="github-link">
+        <span>github.com/shraddha-o8</span>
+      </a>
+    </div>
+  </footer>
+
+  <script src="js/index.js"></script>
+  <script src="js/theme.js"></script>
+</body>
+</html>

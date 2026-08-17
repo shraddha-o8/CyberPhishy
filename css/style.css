@@ -1,0 +1,538 @@
+/* ==========================================================================
+   Design System: Deep Midnight Tech Blue & Glowing Cyan
+   ========================================================================== */
+:root {
+  /* Light Theme (Clean Steel Slate & Cyan) */
+  --bg-main: #e2eaf3;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-subtle: rgba(226, 234, 243, 0.6);
+  --border-color: rgba(14, 116, 144, 0.18);
+  --border-hover: #0284c7;
+  --text-main: #0b1526;
+  --text-muted: #475569;
+  --accent-color: #0284c7;
+  --accent-light: rgba(2, 132, 199, 0.12);
+  --accent-cyan: #0099cc;
+  --shadow-sm: 0 4px 12px rgba(11, 21, 38, 0.05);
+  --shadow-md: 0 10px 25px rgba(2, 132, 199, 0.1);
+
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --radius: 14px;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme (Deep Midnight Navy & Vivid Neon Cyan) */
+  --bg-main: #050b14;
+  --bg-card: rgba(10, 20, 36, 0.75);
+  --bg-card-subtle: rgba(16, 29, 50, 0.6);
+  --border-color: rgba(56, 189, 248, 0.16);
+  --border-hover: #00e5ff;
+  --text-main: #f0f9ff;
+  --text-muted: #8ba0b8;
+  --accent-color: #00e5ff;
+  --accent-light: rgba(0, 229, 255, 0.12);
+  --accent-cyan: #00e5ff;
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 30px rgba(0, 229, 255, 0.12);
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Fullscreen Node Graph Canvas */
+#node-graph-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+main.container {
+  flex: 1;
+  padding-bottom: 90px;
+}
+
+/* ==========================================================================
+   Typewriter Motto
+   ========================================================================== */
+.hero-tagline {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 12px 0 6px;
+  min-height: 1.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  margin-left: 3px;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.hero-subtext {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Theme Toggle Button (Top Right)
+   ========================================================================== */
+.theme-toggle-container {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+.theme-toggle-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+}
+
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: block; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* ==========================================================================
+   Header & Hero
+   ========================================================================== */
+.site-header {
+  text-align: center;
+  padding: 60px 0 30px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.icon-shield {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+}
+
+.site-header h1 {
+  font-family: var(--font-heading);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+/* ==========================================================================
+   Buttons & Controls
+   ========================================================================== */
+.controls-section {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-shimmer {
+  background: linear-gradient(110deg, #0284c7 45%, #38bdf8 55%, #0284c7);
+  background-size: 200% 100%;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.3);
+  animation: shimmerMove 3.5s infinite linear;
+}
+
+[data-theme="dark"] .btn-shimmer {
+  background: linear-gradient(110deg, #082f49 20%, #00e5ff 50%, #082f49 80%);
+  background-size: 200% 100%;
+  color: #f0f9ff;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
+}
+
+@keyframes shimmerMove {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.btn-shimmer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
+}
+
+.btn-shimmer .btn-icon,
+.btn-shimmer .btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Section Headings & Card Grids
+   ========================================================================== */
+.section-title {
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.term-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+
+.term-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.term-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.topic-tag {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 10px;
+  background-color: var(--accent-light);
+  color: var(--accent-cyan);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.short-def {
+  color: var(--text-main);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.layman-def {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  background-color: var(--bg-card-subtle);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-cyan);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Bento Box Grid Layout
+   ========================================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.bento-grid .term-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.bento-span-2 {
+  grid-column: span 2;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints for Bento Grid
+   ========================================================================== */
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-span-2 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 650px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-span-2 {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================
+   Sticky Bottom Profile Banner
+   ========================================================== */
+.sticky-banner-wrapper {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  pointer-events: none;
+  padding: 0 16px;
+}
+
+.sticky-banner {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 10px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background: rgba(10, 20, 36, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .sticky-banner {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15);
+}
+
+.banner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+[data-theme="light"] .banner-badge {
+  background: rgba(2, 132, 199, 0.1);
+  color: var(--accent-color);
+  border-color: rgba(2, 132, 199, 0.25);
+}
+
+.banner-text {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.banner-text strong {
+  color: var(--accent-cyan);
+}
+
+[data-theme="light"] .banner-text strong {
+  color: var(--accent-color);
+}
+
+.banner-trailing {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  transition: transform 0.2s ease;
+}
+
+.sticky-banner:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 12px 35px rgba(0, 229, 255, 0.3);
+}
+
+.sticky-banner:hover .banner-trailing {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  padding: 35px 0 25px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 60px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text-main);
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+.github-link:hover {
+  opacity: 1;
+  color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.github-icon {
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 40px 0 20px;
+  }
+  .site-header h1 {
+    font-size: 1.8rem;
+  }
+  .controls-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn {
+    width: 100%;
+  }
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .sticky-banner-wrapper {
+    bottom: 16px;
+  }
+  .sticky-banner {
+    padding: 6px 14px 6px 8px;
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+  .banner-badge {
+    padding: 3px 8px;
+  }
+}
